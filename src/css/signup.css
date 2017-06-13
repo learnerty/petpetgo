@@ -1,0 +1,29 @@
+.signup{
+  background: #fff;
+  height: 1.8rem;
+  bottom: none;
+  padding-top: 0.2rem;
+}
+.signup input{
+  width: 90%;
+  margin: 0 4.99%;
+  line-height: 0.34rem;
+  display: block;
+  margin-bottom: 0.1rem;
+  border:1px solid #2be0ae;
+  border-radius: 10px;
+  text-indent: 0.2rem;
+  outline: none;
+  color: #999;
+}
+
+.signup button{
+  width: 96%;
+  line-height: 0.4rem;
+  margin: 0 2% 0;
+  border-radius: 8px;
+  color: #544949;
+  float: left;
+  outline: none;
+  background: #2be0ae;
+}

@@ -1,0 +1,26 @@
+.bottom-list {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  background-color: rgba(33,33,33,0.45);
+}
+
+.bottom-list .login-actions ul {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.bottom-list .login-actions li {
+  border: 2px solid white;
+  background-color: #fff;
+  line-height: 0.5rem;
+  border-bottom: 2px solid rgba(25,25,25,0.09);
+  color: #212121;
+  text-align: center;
+  font-size: 0.2rem;
+}
