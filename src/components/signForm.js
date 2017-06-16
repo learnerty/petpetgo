@@ -6,12 +6,17 @@ class SignForm extends React.Component{
   handleSubmit(e){
     e.preventDefault()
     let signinfo ={username:this.username.value,password:this.password.value}
+    if(signinfo.username && signinfo.password){
       if(this.props.signBtn.signBtn === '注册'){
         this.props.sub_signinfo(signinfo)
       }else{
         this.props.Login(signinfo)
       }
       this.form.reset()
+    }else{
+      alert('用户名密码不能为空')
+    }
+
   }
 
   render(){

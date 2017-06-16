@@ -1,8 +1,10 @@
 import React from 'react';
 import '../css/my.css'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Sign from './sign'
 import ExitHint from './ExitHint'
+import HeadPortrait from './HeadPortrait'
 class My extends React.Component{
   state = {
     exit:false
@@ -16,6 +18,7 @@ class My extends React.Component{
   ensure(){
     this.setState({exit:!this.state.exit})
     this.props.dispatch({type:'CURRENTUSER',currentUser:''})
+    this.props.dispatch({type:'GITHUB_HEADPORTRAIT',headpPortrait:''})
     localStorage.removeItem('petpetgoid')
   }
   render(){
@@ -24,9 +27,11 @@ class My extends React.Component{
         {
           this.props.auth ?
           <div>
-            <div className="ucenter-username">{this.props.auth}<i className="iconfont">&#xe603;</i></div>
+            <div className="ucenter-username">
+              <HeadPortrait/>
+            </div>
             <ul className="ucenter-content">
-              <li><i className="iconfont">&#xe602;</i><span>收货地址管理</span><i className="iconfont">&#xe603;</i></li>
+              <li><Link to="/user/address"><i className="iconfont">&#xe602;</i><span>收货地址管理</span><i className="iconfont">&#xe603;</i></Link></li>
               <li><i className="iconfont">&#xe613;</i><span>商家代金券</span><i className="iconfont">&#xe603;</i></li>
               <li><i className="iconfont">&#xe61a;</i><span>意见反馈</span><i className="iconfont">&#xe603;</i></li>
               <li><i className="iconfont">&#xe624;</i><span>常见问题</span><i className="iconfont">&#xe603;</i></li>
@@ -44,6 +49,6 @@ class My extends React.Component{
 }
 const mapStateToProps = (state) => ({
   auth:state.auth,
-  signBtn:state.signBtn
+  headpPortrait:state.headpPortrait
 })
 export default connect(mapStateToProps)(My)

@@ -1,10 +1,12 @@
 import React from 'react';
-
 import Footer from './footer'
 import Header from './Header'
 import Home from './Home'
 import Order from './Order'
+import Search from './Search'
 import My from './My'
+import Address from './user/Address'
+import Commodity from './Commodity'
 import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import axios from 'axios'
@@ -21,7 +23,6 @@ class App extends React.Component{
     }
   }
   render(){
-    console.log(this.props);
     return (
       <div>
         <BrowserRouter>
@@ -31,16 +32,16 @@ class App extends React.Component{
               <Route exact path="/" component={Home}/>
               <Route path="/my" component={My}/>
               <Route path="/order" component={Order}/>
+              <Route path="/search" component={Search}/>
+              <Route path="/user/address" component={Address}/>
+              <Route path="/:id/commodity" component={Commodity}/>
             </div>
             <Footer/>
-
           </div>
         </BrowserRouter>
       </div>
     )
   }
 }
-const mapStateToProps = (state) => ({
-  auth:state.auth
-})
-export default connect(mapStateToProps)(App)
+
+export default connect(null)(App)

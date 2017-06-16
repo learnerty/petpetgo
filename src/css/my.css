@@ -28,6 +28,10 @@
   border-bottom: 1px solid #ccc;
   text-indent: 0.08rem;
 }
+.ucenter-content li a{
+  display: block;
+  color: rgba(0, 0, 0, 0.65);
+}
 .ucenter-content li span{
   margin-left: 0.1rem;
 }

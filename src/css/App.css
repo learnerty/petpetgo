@@ -47,3 +47,6 @@ body{
   flex-grow: 1;
   overflow-y: auto;
 }
+.iconfont{
+  font-size: 0.16rem;
+}

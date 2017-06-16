@@ -17,8 +17,15 @@ class Position extends React.Component{
             var geoc = new BMap.Geocoder();
             geoc.getLocation(point, rs => {
                 var addComp = rs.addressComponents;
+                var position = {
+                  province:addComp.province,
+                  city:addComp.city,
+                  district:addComp.district,
+                  street:addComp.street,
+                  streetNumber:addComp.streetNumber
+                }
                 // var position = `${addComp.province} ${addComp.city} ${addComp.district} ${addComp.street} ${addComp.streetNumber}`
-                this.props.dispatch({type:'POSITION',province:addComp.province,city:addComp.city,district:addComp.district,street:addComp.street,streetNumber:addComp.streetNumber})
+                this.props.dispatch({type:'POSITION',position})
             })
         })
 
@@ -29,7 +36,7 @@ class Position extends React.Component{
     let current = this.props.current
     return (
       <p><i className="iconfont">&#xe61c;</i>
-        {current ? current : '正在获取定位中...'}
+        {current ? current.street : '定位中...'}
       </p>
     )
   }

@@ -32,7 +32,5 @@ class Sign extends React.Component{
     )
   }
 }
-const mapStateToProps = (state) => ({
-  showSign:state.showSign
-})
-export default connect(mapStateToProps)(Sign)
+
+export default connect(null)(Sign)

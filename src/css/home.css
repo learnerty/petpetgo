@@ -11,7 +11,7 @@
   border-radius: 0.2rem;
   text-indent: 0.1rem;
   line-height: 0.3rem;
-  width:44%;
+  width:34%;
   float: left;
 }
 .home-header>div:first-child p{
@@ -21,7 +21,7 @@
   width:80%;
 }
 .home-header>div:last-child{
-  width: 52%;
+  width: 62%;
   background: #fff;
   float: left;
   margin-left: 4%;

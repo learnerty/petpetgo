@@ -1,10 +1,6 @@
 import React from 'react';
 
 class ExitHint extends React.Component{
-  ensure(){
-    this.props.dispatch({type:'CURRENTUSER',currentUser:''})
-    localStorage.removeItem('petpetgoid')
-  }
   render(){
     let largeDiv = {
       background:'rgba(0,0,0,0.5)',
