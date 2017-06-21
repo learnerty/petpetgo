@@ -1,0 +1,26 @@
+.myorder li{
+  height:0.7rem;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 0.14rem;
+}
+.myorder li img{
+  height: 0.5rem;
+  margin: 0 0.1rem 0 0.16rem;
+}
+.myorder li p em{
+  color: #fe4d3d;
+}
+.myorder h4{
+  line-height: 0.3rem;
+  background: #fff;
+  padding-left: 0.1rem;
+  border-bottom: 1px solid #ccc;
+}
+.myorder h4 p{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  width:1.4rem;
+}

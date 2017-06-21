@@ -70,12 +70,11 @@ function commoditys(state=[],action){
     case 'COMMODITY':
       return action.commoditys
     case 'ALTER_NUMBER':
-      let newState = state.map((item,index) => item._id===action.id ? {...item,num:item.num+action.num} : item)
-      // let arr1 = state.slice(0,action.index)
-      // let arr2 = [{...state.slice(action.index,action.index+1)[0],num:state[action.index].num+=action.num}]
-      // let arr3 = state.slice(action.index+1,state.length+1)
-      // let newState = arr1.concat(arr2,arr3)
+      let newState = state.map(item => item._id===action.id ? {...item,num:item.num+action.num} : item)
       return newState
+    case 'EMPTY':
+      let newState1 = state.map(item => ({...item,num:0}))
+      return newState1
     default:
       return state
   }
@@ -99,6 +98,41 @@ function shoppingCart(state=[],action){
   }
 }
 
+function shopName(state='',action){
+  switch (action.type) {
+    case 'SHOPNAME':
+      return action.shopName
+    default:
+      return state
+  }
+}
+function allOrder(state=[],action){
+  switch (action.type) {
+    case 'ALLREDER':
+      return action.orders
+    default:
+      return state
+  }
+}
+
+function cats(state=[],action){
+  switch (action.type) {
+    case 'ALLCATS':
+      return action.cats
+    default:
+      return state
+  }
+}
+
+function currentCat(state={},action){
+  switch (action.type) {
+    case 'CURRENTCATS':
+      return action.currentcat
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   position:positionReducer,
   auth:authReducer,
@@ -109,6 +143,10 @@ const rootReducer = combineReducers({
   headpPortrait,
   commoditys,
   total,
-  shoppingCart
+  shoppingCart,
+  shopName,
+  allOrder,
+  cats,
+  currentCat
 })
 export default rootReducer

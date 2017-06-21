@@ -1,10 +1,41 @@
+
+.cats{
+  width: 22%;
+  font-size: 0.14rem;
+  position: fixed;top: 0.5rem;
+}
+.cats li{
+  height: 0.6rem;
+  width: 100%;
+  padding-left: 0.1rem;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+.currentCatSty{
+  background: #fff;
+}
 .comm_list{
   padding-left: 0.1rem;
+  padding-bottom: 0.5rem;
   background: #fff;
+  width: 78%;
+  position: fixed;top: 0.5rem;left: 22%;
+  overflow-y: auto;
 }
 .comm_list>li{
   border-bottom: 1px solid #ccc;
   padding: 0.1rem 0;
+}
+.comm_list>li:last-child{
+  border-bottom: 0;
+}
+.comm_list>p{
+  background: rgba(204, 204, 204, 0.3);
+  line-height: 0.3rem;
+  font-size: 0.14rem;
+  text-indent: 0.16rem;
+  margin-left: -0.1rem;
 }
 .comm_list img{
   width: 0.6rem;
@@ -32,6 +63,7 @@
   position: fixed;
   bottom: 0;
   padding-left: 0.8rem;
+  border-top: 1px solid #ccc;
 }
 .commfooter .iconfont{
   font-size: 0.46rem;
@@ -40,6 +72,9 @@
 }
 .iconfCol{
   color: #ffd300;
+}
+.commfooter a{
+  color:rgba(0, 0, 0, 0.65);
 }
 .commfooter span{
   font-size: 0.14rem;
@@ -59,8 +94,14 @@
 }
 .shoppingCart{
   background: #fff;
-  height: 2.6rem;
+  max-height: 2.6rem;
   width: 100%;
+  position: fixed;
+  bottom: 0.5rem;
+}
+.shoppingCart ul{
+  overflow-y: auto;
+  max-height: 2.3rem;
 }
 .shoppingCart p{
   text-align: right;
@@ -68,13 +109,27 @@
   line-height: 0.3rem;
 }
 .shoppingCart ul li{
-  line-height: 0.4rem;
+  line-height: 0.5rem;
   margin: 0 0.1rem;
   border-bottom: 1px solid #ccc;
 }
-.iconL{
+.shoppingCart .iconL{
   float: right;
+  height: 0.5rem;
 }
-.iconL i{
+.shoppingCart .iconL i{
   margin: 0 0.02rem;
+  font-size: 0.2rem;
+}
+.shoppingCart .iconL i:last-child{
+  color:#ffd300;
+}
+.shoppingCart .iconL span{
+  color:#ff6900;
+  margin: 0.2rem;
+}
+.shoppingCart>i{
+  font-size: 0.46rem;
+  position: absolute;
+  top: -0.6rem;left: 0.2rem;
 }

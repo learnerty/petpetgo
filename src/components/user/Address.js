@@ -9,11 +9,16 @@ class Address extends React.Component{
     return (
       <div>
         Address
+        <form method="post" action="http://192.168.0.111:3000/login">
+          <input name="username" placeholder="用户名"/>
+          <input name="password" placeholder="密码"/>
+          <input type="submit"/>
+        </form>
       </div>
     )
   }
 }
 const mapStateToProps = (state) => ({
-  
+
 })
 export default connect(mapStateToProps)(withRouter(Address))

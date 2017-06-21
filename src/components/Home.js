@@ -24,7 +24,7 @@ class Home extends React.Component{
               this.props.allshop.length ? this.props.allshop.map(item => {
                 return (
                   <li key={item._id} style={{background:'#fff',marginBottom:'0.08rem'}}>
-                    <Link to={{ pathname: `/${item._id}/commodity`, title: item.name }}>
+                    <Link to={{ pathname: `/commodity/${item._id}`, title: item.name }}>
                       <div><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3011329581,2931078622&fm=117&gp=0.jpg" alt="img"/></div>
                       <p>{item.name}</p>
                       <i className="iconfont">&#xe603;</i>

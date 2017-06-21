@@ -4,7 +4,7 @@ import axios from 'axios'
 import img from '../img/kangaroo.ad18ec6c.png'
 class HeadPortrait extends React.Component{
   componentWillMount(){
-    axios.get(`https://api.github.com/users/${this.props.auth}`)
+    axios.get(`https://api.github.com/users/${this.props.auth.username}`)
       .then(res => {
         this.props.dispatch({type:'GITHUB_HEADPORTRAIT',headpPortrait:res.data.avatar_url})
       })
@@ -30,7 +30,7 @@ class HeadPortrait extends React.Component{
         <div style={divSty}>
           <img src={headpPortrait ? headpPortrait : img} alt='img' style={imgSty}/>
         </div>
-        <h4 style={{textAlign:'center'}}>{this.props.auth}</h4>
+        <h4 style={{textAlign:'center'}}>{this.props.auth.username}</h4>
       </div>
     )
   }

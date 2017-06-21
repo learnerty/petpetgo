@@ -20,7 +20,6 @@ class SignForm extends React.Component{
   }
 
   render(){
-    console.log(this.props);
     return (
       <div className="clearfix signup">
         <form onSubmit={this.handleSubmit.bind(this)} ref={form => this.form=form}>

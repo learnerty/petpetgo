@@ -20,12 +20,19 @@ class My extends React.Component{
     this.props.dispatch({type:'CURRENTUSER',currentUser:''})
     this.props.dispatch({type:'GITHUB_HEADPORTRAIT',headpPortrait:''})
     localStorage.removeItem('petpetgoid')
+    if(sessionStorage.getgoshops){
+      let gethis = JSON.parse(sessionStorage.getgoshops)
+      gethis.forEach(item => (
+        sessionStorage.removeItem(item)
+      ))
+      sessionStorage.removeItem('getgoshops')
+    }
   }
   render(){
     return (
-      <div className={this.props.auth ? "ucenter" : null} style={{width:'100%'}}>
+      <div className={this.props.auth.username ? "ucenter" : null} style={{width:'100%'}}>
         {
-          this.props.auth ?
+          this.props.auth.username ?
           <div>
             <div className="ucenter-username">
               <HeadPortrait/>

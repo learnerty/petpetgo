@@ -26,11 +26,22 @@ class Search extends React.Component{
     if(this.input.value){
       if(localStorage.searchhistory.length){
         let searchhistory =JSON.parse(localStorage.searchhistory)
+        let index
+        for(let i=0;i<searchhistory.length;i++){
+          if(searchhistory[i]===this.input.value){
+            index = i
+          }
+        }
+        if(index){
+          searchhistory.splice(index,1)
+        }
         localStorage.searchhistory = JSON.stringify([this.input.value,...searchhistory])
+        this.setState({history:[this.input.value,...searchhistory]})
       }else{
         localStorage.searchhistory = JSON.stringify([this.input.value])
+        this.setState({history:[this.input.value]})
       }
-      this.setState({history:[this.input.value,...this.state.history]})
+
     }else{
       alert('请输入店铺或商品名称')
     }
@@ -46,6 +57,21 @@ class Search extends React.Component{
       this.props.dispatch({type:'SEARCHGOOD',commodity:''})
       this.setState({val:''})
     }
+  }
+  handleClickLi(item){
+    this.input.value=item
+    this.search()
+    this.input.focus()
+    let searchhistory =JSON.parse(localStorage.searchhistory)
+    let index
+    for(let i=0;i<searchhistory.length;i++){
+      if(searchhistory[i]===this.input.value){
+        index = i
+      }
+    }
+    let del = searchhistory.splice(index,1)
+    localStorage.searchhistory = JSON.stringify([...del,...searchhistory])
+    this.setState({history:[...del,...searchhistory]})
   }
 
   render(){
@@ -72,11 +98,7 @@ class Search extends React.Component{
               {
                 this.state.history.map(item => {
                   return (
-                    <li key={Math.random()*Math.random()} onClick={()=>{
-                      this.input.value=item
-                      this.search()
-                      this.input.focus()
-                    }}>
+                    <li key={Math.random()*Math.random()} onClick={this.handleClickLi.bind(this,item)}>
                       <i className="iconfont">&#xe60c;</i>
                       <p>{item}</p>
                     </li>
@@ -85,7 +107,7 @@ class Search extends React.Component{
               }
             </ul>
             <div onClick={()=>{
-              localStorage.removeItem('searchhistory')
+              localStorage.searchhistory = JSON.stringify([])
               this.setState({history:''})
             }}>清除历史记录</div>
           </div> : null
@@ -96,7 +118,7 @@ class Search extends React.Component{
             shop.length ? shop.map(item => {
               return (
                 <li key={item._id}>
-                  <Link to={`/${item._id}/commodity`} onClick={()=>{
+                  <Link to={{ pathname: `/commodity/${item._id}`, title: item.name }} onClick={()=>{
                     this.props.dispatch({type:'SEARCHGOOD',commodity:''})
                     this.history()
                   }}>
