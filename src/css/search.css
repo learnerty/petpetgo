@@ -6,22 +6,25 @@
   align-items: center;
   position: relative;
 }
-.search i:first-child{
+.search>svg{
   position: absolute;
-  left:0.22rem;top:0.1rem;
-  font-size: 0.14rem;
+  left:0.25rem;top:0.16rem;
   display: block;
-  height: 0.3rem;
-  line-height: 0.3rem;
+  width: 0.16rem;
+  height:0.16rem;
 }
-.search i:nth-child(3){
-  position: absolute;
-  right:0.9rem;top:0.1rem;
-  font-size: 0.14rem;
-  display: block;
+.search div{
+  position: absolute;right:0.8rem;top:0.1rem;
   height: 0.3rem;
-  line-height: 0.3rem;
-  color:#999;
+  width: 0.3rem;
+  text-align: center;
+}
+.search div svg{
+  position: absolute;
+  left:0.06rem;top:0.08rem;
+  display: block;
+  width: 0.16rem;
+  height:0.16rem;
 }
 .search input{
   width: 2.78rem;
@@ -44,12 +47,14 @@
   color: #fff;
   background: rgba(204, 204, 204, 0.8);
 }
+.shopList svg{
+  width: 0.2rem;
+  height: 0.2rem;
+}
 .shopList>li{
   padding: 0 0.15rem;
   line-height: 0.6rem;
   border-bottom: 1px solid #ccc;
-
-
   background: #fff;
 }
 .shopList>li a{
@@ -72,9 +77,6 @@
 }
 .shopList>li p{
   width: 100%;
-}
-.shopList>li i{
-  float: right;
 }
 .shopList>li p>span{
   color:#f9b700;
@@ -104,8 +106,10 @@
   padding-left: 0.4rem;
   border-bottom: 1px solid #ccc;
 }
-.history li>i{
-  position: absolute;left:0.3rem;
+.history li>svg{
+  position: absolute;left:0.3rem;top: 0.1rem;
+  width: 0.2rem;
+  height: 0.2rem;
 }
 .history div{
   text-align: center;

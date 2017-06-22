@@ -35,7 +35,7 @@ class Order extends React.Component{
                     <ul key={item._id}>
                       <h4><p>{item.products.map(item => `@${item.name}`)}</p></h4>
                       <li>
-                        <img src={item.products[0].poster}/>
+                        <img src={item.products[0].poster} alt="img"/>
                         <div>
                           <p><em>￥{this.total(item.products)}</em></p>
                           <p>由美团专送提供高品质服务</p>

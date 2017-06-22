@@ -14,9 +14,7 @@ const sub_signinfo = (signinfo) =>(
 
   }
 )
-
 export {sub_signinfo}
-
 
 const Login = (signinfo) =>(
   dispatch => {
@@ -30,5 +28,15 @@ const Login = (signinfo) =>(
       .catch(err => alert('密码错误，请核对后重试'))
   }
 )
-
 export {Login}
+
+const headpor = (username) =>(
+  dispatch => {
+    axios.get(`https://api.github.com/users/${username}`)
+      .then(res => {
+        dispatch({type:'GITHUB_HEADPORTRAIT',headpPortrait:res.data.avatar_url})
+      })
+      .catch(err => console.log(err))
+  }
+)
+export {headpor}

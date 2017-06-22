@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import axios from 'axios'
+import store from '../redux/store'
+import { shoptitle,getcommodity,getcats,emptyCom,changeQuantity,emptyshopcart,switchCats } from '../redux/actions/commodity.js'
 import '../css/Commodity.css'
 class Commodity extends React.Component{
   constructor(){
@@ -16,7 +17,7 @@ class Commodity extends React.Component{
         localStorage.petgotitle = JSON.stringify(title)
     }
     if(localStorage.petgotitle){
-      this.props.dispatch({type:'CHANGEHEADERVSL',headerval:JSON.parse(localStorage.petgotitle)})
+      this.props.shoptitle(JSON.parse(localStorage.petgotitle))
     }
     if(!sessionStorage.getItem(`${this.props.match.params.id}`)){
       sessionStorage.setItem(`${this.props.match.params.id}`,"[]")
@@ -36,66 +37,24 @@ class Commodity extends React.Component{
       }
     }
     sessionStorage.setItem('getgoshop',[this.props.match.params.id])
-    axios.get('http://petapi.haoduoshipin.com/products')
-      .then(res => {
-        let comm = res.data.products.map(item => ({...item,num:0}))
-        let sess = JSON.parse(sessionStorage.getItem(`${this.props.match.params.id}`))
-        let commoditys = []
-        if(sess.length && comm.length){
-          for(var i=0;i<comm.length;i++){
-            let kaiguan = false
-            for(var j=0;j<sess.length;j++){
-              if(comm[i]._id===sess[j].id){
-                commoditys.push({...comm[i],num:sess[j].num})
-                console.log(commoditys);
-                kaiguan = true
-              }
-            }
-            if(kaiguan===true){
-              continue
-            }
-            commoditys.push(comm[i])
-          }
-        }else{
-          commoditys = comm
-        }
-        this.props.dispatch({type:'COMMODITY',commoditys})
-        let total = 0
-        let shoppingCart = this.props.commoditys.filter(item => item.num>0)
-        shoppingCart.forEach(item => total+=item.price*item.num)
-        this.props.dispatch({type:'COMM_TOTAL',total})
-        this.props.dispatch({type:'SHOPPINGCART',shoppingCart})
-      })
-    axios.get(`http://petapi.haoduoshipin.com/shop/${this.props.match.params.id}/cats`)
-      .then(res => {
-        this.props.dispatch({type:'ALLCATS',cats:res.data.cats})
-        if(res.data.cats.length){
-          this.props.dispatch({type:'CURRENTCATS',currentcat:{name:res.data.cats[0].name,id:res.data.cats[0]._id}})
-        }
-      })
+    this.props.getcommodity(this.props.match.params.id,this.props.commoditys)
+    this.props.getcats(this.props.match.params.id)
+
   }
   componentWillUnmount(){
-    this.props.dispatch({type:'COMMODITY',commoditys:[]})
-    this.props.dispatch({type:'ALLCATS',cats:[]})
+    this.props.emptyCom()
   }
   changeQuantity(num,id){
-    this.props.dispatch({type:'ALTER_NUMBER',num,id})
+    store.dispatch({type:'ALTER_NUMBER',num,id})
     setTimeout(()=>{
-      let total = 0
-      let shoppingCart = this.props.commoditys.filter(item => item.num>0)
-      shoppingCart.forEach(item => total+=item.price*item.num)
-      this.props.dispatch({type:'COMM_TOTAL',total})
-      this.props.dispatch({type:'SHOPPINGCART',shoppingCart})
+      this.props.changeQuantity(num,this.props.match.params.id,this.props.commoditys,this.props.total,this.props.shoppingCart)
       if(this.props.total===0){
         this.setState({show:false})
       }
-      let seCart = shoppingCart.map(item=>({id:item._id,num:item.num}))
-      let seCart1 = JSON.stringify(seCart)
-      sessionStorage.setItem(`${this.props.match.params.id}`,seCart1)
     })
   }
   switchCats(item){
-    this.props.dispatch({type:'CURRENTCATS',currentcat:{name:item.name,id:item._id}})
+    this.props.switchCats(item)
   }
 
   render(){
@@ -136,7 +95,7 @@ class Commodity extends React.Component{
                 ) : null
               ))
             }
-          </ul> : <div>抱歉，未找到商品</div>
+          </ul> : <div className="notfound"><p>很抱歉，店家未提供商品</p></div>
         }
 
         {
@@ -146,11 +105,9 @@ class Commodity extends React.Component{
             <i className="iconfont" style={{color:'#ffd300'}} onClick={()=>this.setState({show:false})}>&#xe63c;</i>
             <div>
               <p><span onClick={()=>{
-                this.props.dispatch({type:'SHOPPINGCART',shoppingCart:''})
-                this.props.dispatch({type:'EMPTY'})
-                this.props.dispatch({type:'COMM_TOTAL',total:0})
-                this.setState({show:false})
+                this.props.emptyshopcart()
                 sessionStorage.setItem(`${this.props.match.params.id}`,"[]")
+                this.setState({show:false})
               }}>
                 <i className="iconfont">&#xf0002;</i>清空购物车</span>
               </p>
@@ -181,7 +138,7 @@ class Commodity extends React.Component{
             <div className="shoppingNum">{shoppingNum}</div>
             <i className="iconfont" style={{color:'#ffd300'}} onClick={()=>this.setState({show:true})}>&#xe63c;</i>
             <span style={{lineHeight:'0.5rem',color:'red',fontSize:'0.18rem'}}>￥{this.props.total}</span>
-            <Link to='/order/preview'><span style={{float:'right',lineHeight:'0.5rem',padding:'0 0.3rem',background:'#ffd300'}}>去结算</span></Link>
+            <Link to={{pathname:'/order/preview',shopid:this.props.match.params.id}}><span style={{float:'right',lineHeight:'0.5rem',padding:'0 0.3rem',background:'#ffd300'}}>去结算</span></Link>
           </div> :
           <div className="commfooter">
             <i className="iconfont">&#xe63c;</i>
@@ -200,4 +157,4 @@ const mapStateToProps = (state) => ({
   cats:state.cats,
   currentCat:state.currentCat
 })
-export default connect(mapStateToProps)(withRouter(Commodity))
+export default withRouter(connect(mapStateToProps,{shoptitle,getcommodity,getcats,emptyCom,changeQuantity,emptyshopcart,switchCats})(Commodity))

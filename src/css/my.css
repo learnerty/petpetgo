@@ -35,7 +35,12 @@
 .ucenter-content li span{
   margin-left: 0.1rem;
 }
-.ucenter-username i,.ucenter-content li i:last-child{
+.ucenter-content svg{
+  width: 0.2rem;
+  height: 0.2rem;
+  position: relative;top: 0.05rem;
+}
+.ucenter-content li svg:last-child{
   float: right;
 }
 .ucenter-content li:last-child{

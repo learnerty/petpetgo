@@ -1,3 +1,6 @@
+.myorder ul{
+  border-bottom: 1px solid #ccc;
+}
 .myorder li{
   height:0.7rem;
   background: #fff;

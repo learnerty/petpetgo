@@ -16,15 +16,19 @@
   border-bottom: 1px solid #ccc;
   line-height: 0.4rem;
 }
+.boughtGoods{
+  text-align: right;
+}
 .boughtGoods p:first-child{
   float: left;
 }
 .boughtGoods p:nth-child(2){
   float: right;
+  width: 0.6rem;
 }
 .boughtGoods p:last-child{
   float: right;
-  margin-right: 0.6rem;
+  margin-right: 0.36rem;
   color: #898989;
 }
 .commodityInfo>div:last-child{
